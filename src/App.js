@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
+import { Container, Row, Col } from "react-bootstrap";
+import StudentForm from "./Components/StudentForm";
+import StudentList from "./Components/StudentList";
+
 
 function App() {
+  // The first value is the value of the state and the second changes the value
+  const [students, setStudents] = useState([]);
+  const addNewStudent = (student) => {
+    // ... is a spread operator that takes the content of an state/array and updates it where needed.
+    setStudents([...students, student]);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    // The fluid written like an attribute here performs the same function as in bootstrap.
+    <Container fluid>
+      <Row>
+        <Col>
+          <h1>Forms</h1>
+          <StudentForm addStudent={addNewStudent} />
+        </Col>
+        <Col>
+          <h1>Cards</h1>
+          <StudentList students={students} />
+        </Col>
+      </Row>
+    </Container>
   );
 }
 
